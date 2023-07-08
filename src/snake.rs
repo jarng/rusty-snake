@@ -15,7 +15,7 @@ pub enum Direction {
 }
 
 impl Direction {
-    fn opposite(&self) -> Direction {
+    pub fn opposite(&self) -> Direction {
         match *self {
             Direction::Up => Direction::Down,
             Direction::Down => Direction::Up,
@@ -42,6 +42,7 @@ impl Snake {
         let mut body: LinkedList<Block> = LinkedList::new();
         body.push_back(Block { x: x + 2, y });
         body.push_back(Block { x: x + 1, y });
+        body.push_back(Block { x, y });
 
         Snake {
             direction: Direction::Right,
@@ -84,9 +85,9 @@ impl Snake {
             Direction::Left => Block {
                 x: last_x - 1,
                 y: last_y,
-            }
+            },
         };
-        
+
         self.body.push_front(new_block);
         let removed_block = self.body.pop_back().unwrap();
         self.tail = Some(removed_block);
@@ -101,7 +102,7 @@ impl Snake {
         let mut moving_dir = self.direction;
         match dir {
             Some(d) => moving_dir = d,
-            None => {},
+            None => {}
         }
 
         match moving_dir {
@@ -124,7 +125,7 @@ impl Snake {
                 return true;
             }
 
-            ch +=1;
+            ch += 1;
             if ch == self.body.len() - 1 {
                 break;
             }
