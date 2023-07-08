@@ -25,25 +25,22 @@ pub struct Game {
 
     game_over: bool,
     waiting_time: f64,
+
+    point: u32,
 }
 
 impl Game {
     pub fn new(width: i32, height: i32) -> Self {
-        let mut rng = thread_rng();
-        let snake_x = rng.gen_range(1..width - 1);
-        let snake_y = rng.gen_range(1..width - 1);
-        let food_x = rng.gen_range(1..width - 1);
-        let food_y = rng.gen_range(1..width - 1);
-
         Self {
-            snake: Snake::new(snake_x, snake_y),
+            snake: Snake::new(2, 2),
             waiting_time: 0.0,
             food_exists: true,
-            food_x: food_x,
-            food_y: food_y,
+            food_x: 10,
+            food_y: 15,
             width,
             height,
             game_over: false,
+            point: 0,
         }
     }
 
@@ -107,6 +104,8 @@ impl Game {
         if self.food_exists && self.food_x == head_x && self.food_y == head_y {
             self.food_exists = false;
             self.snake.restore_tail();
+            self.point += 1;
+            println!("{}", self.point);
         }
     }
 
@@ -147,16 +146,12 @@ impl Game {
     }
 
     fn restart(&mut self) {
-        let mut rng = thread_rng();
-
-        self.snake = Snake::new(
-            rng.gen_range(1..self.width - 1),
-            rng.gen_range(1..self.width - 1),
-        );
+        self.snake = Snake::new(2, 2);
         self.waiting_time = 0.0;
         self.food_exists = true;
-        self.food_x = rng.gen_range(1..self.width - 1);
-        self.food_y = rng.gen_range(1..self.width - 1);
+        self.food_x = 10;
+        self.food_y = 15;
         self.game_over = false;
+        self.point = 0;
     }
 }
