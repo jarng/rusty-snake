@@ -105,7 +105,6 @@ impl Game {
             self.food_exists = false;
             self.snake.restore_tail();
             self.point += 1;
-            println!("{}", self.point);
         }
     }
 

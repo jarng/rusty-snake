@@ -6,16 +6,15 @@ A simple snake game written in Rust for educational purposes.
 
 ## Prerequisites:
 
-- Rust
-- Cargo
+- [Rust](https://www.rust-lang.org/tools/install)
 
 ## Quick start
 
 - Run:
 ```bash
-cargo run
+cargo run --release
 ```
 
 ## TODO
 
-- [ ] Add score
+- [ ] Add scoring
